@@ -1,0 +1,34 @@
+class Solution {
+public:
+    vector<TreeNode*> generateTrees(int n) {
+        return solve(1,n);
+    }
+    
+    vector<TreeNode*> solve(int start,int end)
+    {
+        vector<TreeNode*>val;
+        if(start>end)
+        {
+            val.push_back(NULL);
+            return val;
+        }
+        for(int i=start;i<=end;i++)
+        {
+        vector<TreeNode*>leftVal=solve(start,i-1);
+            vector<TreeNode*>rightVal=solve(i+1,end);
+        for(auto l:leftVal)
+        {
+            for(auto r:rightVal)
+            {
+                TreeNode* root=new TreeNode(i);
+                root->left=l;
+                root->right=r;
+                val.push_back(root);
+            }
+        }
+            
+            
+        }
+        return val;
+    }
+};
